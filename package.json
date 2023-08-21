@@ -1,7 +1,7 @@
 {
   "name": "math-power",
   "version": "1.0.0",
-  "description": "web app for AWS experimenting via simple math operations",
+  "description": "Web app for AWS experimenting via simple math operations",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,8 @@
     "Services",
     "experimenting",
     "math",
-    "operations"
+    "operations",
+    "maths"
   ],
   "author": "Darren Semotiuk",
   "license": "MIT",
