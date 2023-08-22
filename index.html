@@ -55,38 +55,33 @@
 </div>
 
 <script>
-  var qi = id => document.getElementById(id);
+  const qi = id => document.getElementById(id);
 
-  var operatorEl = qi("operator");
-  var resultEl = qi("result");
+  const operatorEl = qi("operator");
+  const resultEl = qi("result");
 
-  var calculate = () => {
-    var num1 = parseFloat(qi("num1").value);
-    var num2 = parseFloat(qi("num2").value);
-    var operator = operatorEl.value;
-    var result;
+  const calculate = () => {
+    const num1 = parseFloat(qi("num1").value);
+    const num2 = parseFloat(qi("num2").value);
+    const operator = operatorEl.value;
 
-    switch (operator) {
-      case "to the power of":
-        result = Math.pow(num1, num2);
-        break;
-      case "plus":
-        result = num1 + num2;
-        break;
-      case "minus":
-        result = num1 - num2;
-        break;
-      case "times":
-        result = num1 * num2;
-        break;
-      case "divided by":
-        result = num1 / num2;
-        break;
-      default:
-        operatorEl.focus();
-        alert("Please select an operator");
-        return;
+    const operations = {
+      "to the power of": (num1, num2) => Math.pow(num1, num2),
+      "plus": (num1, num2) => num1 + num2,
+      "minus": (num1, num2) => num1 - num2,
+      "times": (num1, num2) => num1 * num2,
+      "divided by": (num1, num2) => num1 / num2,
     };
+
+    const fn = operations[operator];
+
+    if(!fn) {
+      operatorEl.focus();
+      alert("Please select an operator");
+      return;
+    };
+
+    const result = fn(num1, num2);
 
     qi("result").value = result;
     resultEl.focus();

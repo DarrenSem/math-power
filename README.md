@@ -1,2 +1,2 @@
 # math-power
-AWS experimenting via simple math operations
+Web app for AWS experimenting via simple math operations
