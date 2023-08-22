@@ -55,15 +55,62 @@
 </div>
 
 <script>
+
+// {  // putting all code inside block = non-polluting like an IIFE (likely never will need this tho)
+
+  const getLocation = () => {
+    // TODO: future might mock during testing?
+    const loc = new URL("" || location); 
+    return loc;
+  };
+
+  const LOC = getLocation();
+
   const qi = id => document.getElementById(id);
 
+  const num1El = qi("num1");
   const operatorEl = qi("operator");
+  const num2El = qi("num2");
   const resultEl = qi("result");
 
-  const calculate = () => {
-    const num1 = parseFloat(qi("num1").value);
-    const num2 = parseFloat(qi("num2").value);
+  const getArgsData = href => {
+
+    if(!/\?/.test(href))return null;
+
+    const p = new URLSearchParams(href);
+
+    // num1El.value = p.has("num1") ? p.get("num1") : "";
+    num1El.value = p.get("num1") ?? "";
+    operatorEl.value = p.get("operator") ?? "";
+    num2El.value = p.get("num2") ?? "";
+
+    // return undefined, to ensure getFieldsData parses the values we just moved into the fields
+    return;
+  };
+
+  const getFieldsData = () => {
+    const num1 = parseFloat(num1El.value);
     const operator = operatorEl.value;
+    const num2 = parseFloat(num2El.value);
+    return { num1, operator,num2 };
+  };
+
+  const calculate = data => {
+
+    if(data === null) {
+      data = getArgsData(LOC.href);
+
+      if(data === null) {
+        return;
+      };
+    };
+
+    if(data == null) {
+      // default logic if undefined (getArgsData had args to parse, or button was clicked)
+      data = getFieldsData();
+    };
+
+    const {num1, num2, operator} = data;
 
     const operations = {
       "to the power of": (num1, num2) => Math.pow(num1, num2),
@@ -83,10 +130,20 @@
 
     const result = fn(num1, num2);
 
-    qi("result").value = result;
+    resultEl.value = result;
     resultEl.focus();
     resultEl.select();
   };
+
+  const main = (window, setTimeout, delay) => {
+    // auto-calculate based on getArgsData only (silently skipped if no args passed)
+    window.onload = setTimeout( () => calculate(null), );
+  };
+
+  // TODO: could modify later for Node or invisible testing to work too, idk
+  main(window, setTimeout, 250);
+
+// };
 
 </script>
 
