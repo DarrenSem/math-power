@@ -50,116 +50,11 @@
 </label>
 
 <div id="container-calculate">
-  <button onClick="calculate()">Equals:</button>
+  <button id="calc-button">Equals:</button>
   <input type="text" id="result" readonly>
 </div>
 
-<script>
-
-// {  // putting all code inside block = non-polluting like an IIFE (likely never will need this tho)
-
-  const getLocation = () => {
-    // TODO: future might mock during testing?
-    const loc = new URL("" || location); 
-    return loc;
-  };
-
-  const LOC = getLocation();
-
-  const qi = id => document.getElementById(id);
-
-  const num1El = qi("num1");
-  const operatorEl = qi("operator");
-  const num2El = qi("num2");
-  const resultEl = qi("result");
-
-  const setFieldsData = (num1, operator, num2) => {
-    num1El.value = num1;
-    operatorEl.value = operator;
-    num2El.value = num2;
-  };
-
-  const getArgsData = href => {
-
-    if(!/\?/.test(href))return null;
-
-    // new URL(href), because new URLSearchParams(href) seems to skip the 1st param immediately after "?"
-    const p = new URL(href).searchParams;
-
-    setFieldsData(
-      p.get("num1") ?? "",  // briefer than p.has("num1") ? p.get("num1") : ""
-      p.get("operator") ?? "",
-      p.get("num2") ?? ""
-    );
-
-    // return undefined, to ensure getFieldsData parses the values we just moved into the fields
-    return;
-  };
-
-  const getFieldsData = () => {
-    const num1 = num1El.value;
-    const operator = operatorEl.value;
-    const num2 = num2El.value;
-    return { num1, operator,num2 };
-  };
-
-  const calculate = data => {
-
-    if(data === null) {
-      data = getArgsData(LOC.href);
-
-      if(data === null) {
-        return;
-      };
-    };
-
-    if(data == null) {
-      // default logic if undefined (getArgsData had args to parse, or button was clicked)
-      data = getFieldsData();
-    };
-
-    let {num1, num2, operator} = data;
-
-    setFieldsData(num1, operator, num2);  // for visual consistency if calculate({key:value})
-
-    num1 = parseFloat(num1);
-    num2 = parseFloat(num2);
-
-    const operations = {
-      "to the power of": (num1, num2) => Math.pow(num1, num2),
-      "plus": (num1, num2) => num1 + num2,
-      "minus": (num1, num2) => num1 - num2,
-      "times": (num1, num2) => num1 * num2,
-      "divided by": (num1, num2) => num1 / num2,
-    };
-
-    const fn = operations[operator];
-
-    if(!fn) {
-      operatorEl.focus();
-      alert("Please select an operator");
-      return;
-    };
-
-    const result = fn(num1, num2);
-
-    resultEl.value = result;
-    resultEl.focus();
-    resultEl.select();
-
-    return result;
-  };
-
-  const main = (window, setTimeout, delay) => {
-    // auto-calculate based on getArgsData only (silently skipped if no args passed)
-    window.onload = setTimeout( () => calculate(null), delay);
-  };
-
-  // TODO: could modify later for Node or invisible testing to work too, idk
-  main(window, setTimeout, 100);
-
-// };
-
-</script>
+<script type="text/javascript" src="./calc.js"></script>
+<script defer type="text/javascript" src="./browser.js"></script>
 
 </body></html>
