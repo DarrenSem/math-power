@@ -118,7 +118,6 @@
       data = getFieldsData();
     };
 
-debugger;
     let {num1, num2, operator} = data;
 
     setFieldsData(num1, operator, num2);  // for visual consistency if calculate({key:value})
@@ -153,11 +152,11 @@ debugger;
 
   const main = (window, setTimeout, delay) => {
     // auto-calculate based on getArgsData only (silently skipped if no args passed)
-    window.onload = setTimeout( () => calculate(null), );
+    window.onload = setTimeout( () => calculate(null), delay);
   };
 
   // TODO: could modify later for Node or invisible testing to work too, idk
-  main(window, setTimeout, 250);
+  main(window, setTimeout, 100);
 
 // };
 
