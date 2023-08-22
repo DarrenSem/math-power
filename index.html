@@ -73,25 +73,33 @@
   const num2El = qi("num2");
   const resultEl = qi("result");
 
+  const setFieldsData = (num1, operator, num2) => {
+    num1El.value = num1;
+    operatorEl.value = operator;
+    num2El.value = num2;
+  };
+
   const getArgsData = href => {
 
     if(!/\?/.test(href))return null;
 
-    const p = new URLSearchParams(href);
+    // new URL(href), because new URLSearchParams(href) seems to skip the 1st param immediately after "?"
+    const p = new URL(href).searchParams;
 
-    // num1El.value = p.has("num1") ? p.get("num1") : "";
-    num1El.value = p.get("num1") ?? "";
-    operatorEl.value = p.get("operator") ?? "";
-    num2El.value = p.get("num2") ?? "";
+    setFieldsData(
+      p.get("num1") ?? "",  // briefer than p.has("num1") ? p.get("num1") : ""
+      p.get("operator") ?? "",
+      p.get("num2") ?? ""
+    );
 
     // return undefined, to ensure getFieldsData parses the values we just moved into the fields
     return;
   };
 
   const getFieldsData = () => {
-    const num1 = parseFloat(num1El.value);
+    const num1 = num1El.value;
     const operator = operatorEl.value;
-    const num2 = parseFloat(num2El.value);
+    const num2 = num2El.value;
     return { num1, operator,num2 };
   };
 
@@ -110,7 +118,13 @@
       data = getFieldsData();
     };
 
-    const {num1, num2, operator} = data;
+debugger;
+    let {num1, num2, operator} = data;
+
+    setFieldsData(num1, operator, num2);  // for visual consistency if calculate({key:value})
+
+    num1 = parseFloat(num1);
+    num2 = parseFloat(num2);
 
     const operations = {
       "to the power of": (num1, num2) => Math.pow(num1, num2),
@@ -133,6 +147,8 @@
     resultEl.value = result;
     resultEl.focus();
     resultEl.select();
+
+    return result;
   };
 
   const main = (window, setTimeout, delay) => {
