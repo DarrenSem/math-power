@@ -12,8 +12,14 @@
 
   const calculate = data => {
 
+    let nodeArgsMock;
+    if(typeof data === "string" || Array.isArray(data) ) {
+      nodeArgsMock = data;
+      data = null;
+    };
+
     if(data === null) {
-      data = getArgsData(calculate.href);
+      data = getArgsData(calculate.href, nodeArgsMock);
 
       if(data === null) {
         return;
@@ -43,7 +49,7 @@
     const fn = operations[operator];
 
     if(!fn) {
-      return calculate.warnAfterFocus("Please select an operator")
+      return calculate.warnAfterFocus("Please select an operator");
     };
 
     const result = fn(num1, num2);
@@ -61,8 +67,8 @@
 
   const setFieldsData = (num1, operator, num2) => {
     fieldsMock.num1 = num1;
-    fieldsMock.num2 = num2;
     fieldsMock.operator = operator;
+    fieldsMock.num2 = num2;
 
     fieldsMock.result = "";
     // delete fieldsMock.result;
@@ -80,7 +86,9 @@
     console.log(fieldsMock);
   };
 
-  const getArgsData = href => {
+  const getArgsData = (href, nodeArgsMock) => {
+
+    href = getNodeArgsData(nodeArgsMock) ?? href;
 
     if(!/\?/.test(href))return null;
 
@@ -97,13 +105,51 @@
     return;
   };
 
+  const getNodeArgsData = nodeArgsMock => {
+
+    const argv = (
+      nodeArgsMock
+      ? [nodeArgsMock].flat()
+      : typeof process !== "undefined"
+      ? process.argv.slice(2)
+      : []
+    );
+
+    const args = argv.length
+    ? argv.join(" ").replace(/[^a-z\d.+%-]/gi, " ").trim()
+    : "";
+
+    const hasNamedArgs = /\??\b(num[12]|operator)\s*[:= ]\s*[a-z\d.+%-]/i.test(args);
+    const orderedList = args.split(/\s+/);
+
+    let num1, operator, num2;
+
+    if(hasNamedArgs) {
+      num1 = args.match( /\bnum1\s*[:= ]\s*([a-z\d.+%-]*)/i )?.[1];
+      operator = args.match( /\boperator\s*[:= ]\s*([a-z\d.+%-]*)/i )?.[1];
+      num2 = args.match( /\bnum2\s*[:= ]\s*([a-z\d.+%-]*)/i )?.[1];
+    } else {
+      num1 = orderedList.shift();
+      operator = orderedList.shift();
+      num2 = orderedList.shift();
+    };
+
+    return (
+      args.trim().length
+      ? `X:?num1=${num1}&operator=${operator}&num2=${num2}`
+      : null
+    );
+
+  };
+
   calculate.getFieldsData = getFieldsData;
   calculate.setFieldsData = setFieldsData;
   calculate.warnAfterFocus = warnAfterFocus;
   calculate.output = output;
 
+  calculate.href = "";
   // calculate.href = "https://example.com/api#?num1=3.x&num2=4&operator=times"; // no automatic .replace(location.hash, "");
-  calculate.href = "https://example.com/api?num1=3.x&num2=4&operator=times";
+  // calculate.href = "https://example.com/api?num1=3.x&num2=4&operator=times";
 
   // calculate.calculate = calculate;  // useless, it seems: calculate.default = calculate;
 
@@ -112,7 +158,14 @@
 } );
 
 // console.log(module.exports);
-// // [Function: calculate] {
-// //   getFieldsData: [Function: getFieldsData],
-// //   setFieldsData: [Function: setFieldsData]
-// // }
+// [Function: calculate] {
+//   getFieldsData: [Function: getFieldsData],
+//   setFieldsData: [Function: setFieldsData],
+//   warnAfterFocus: [Function: warnAfterFocus],
+//   output: [Function: output],
+//   href: ''
+// }
+
+// const calco = globalThis.calculate || module.exports;
+// (null) = try Node CLI args, if that fails then will attempt querystring
+// console.log( calco(null) );

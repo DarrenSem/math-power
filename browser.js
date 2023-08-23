@@ -46,5 +46,4 @@ const main = (window, setTimeout, delay) => {
 
 };
 
-// TODO: could modify later for Node or invisible testing to work too, idk
 main(window, setTimeout, 100);  // ensure time enough that HTML fields are visible
