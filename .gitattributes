@@ -1,1 +1,5 @@
+# git CLI
 *.js.map -diff
+
+# GitHub
+*.js.map linguist-generated=true
