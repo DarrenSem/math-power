@@ -1,6 +1,6 @@
 {
   "name": "math-power",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Web app for AWS experimenting via simple math operations",
   "main": "index.html",
 
@@ -10,8 +10,8 @@
     "build": "npm run clean && tsc",
     "test": "npm run build && node dist/calc.test.js",
     "preview": "npm run build && START \"\" ./index.html",
-    "ghp": "echo TODO: ghp",
-    "publish": "npm run build && npm run ghp"
+    "gh": " START \"\" /b \"C:\\data\\apps\\git\\gh-pages merge from master.bat\" ",
+    "publish": "npm run build && npm run gh ."
   },
 
   "keywords": [
