@@ -1,4 +1,4 @@
-// calc.js: loaded after defer-loaded "calc.js"
+// calc.ts: loaded after defer-loaded "calc.ts"
 (function (root, factory) {
     typeof define === "function" && define.amd
         ? define([], factory)

@@ -1,3 +1,5 @@
+// calc.test.ts
+
 var calctest = require("./calc.js");
 calctest.href = "https://example.com/testing-api?num1=3.x&num2=4&operator=times";
 console.log(calctest);
@@ -117,3 +119,4 @@ console.log( calctest("https://example.com/testing-api?num1=3.x&num2=4&operator=
 // { num1: '3.x', operator: 'to the power of', num2: '4', result: '' }
 // { num1: '3.x', operator: 'to the power of', num2: '4', result: 81 }
 // 81
+

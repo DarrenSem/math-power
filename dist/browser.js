@@ -1,4 +1,4 @@
-// browser.js: defer-loaded after "calc.js"
+// browser.ts: defer-loaded after "calc.ts"
 var calculate;
 var qi = function (id) { return document.getElementById(id); };
 var num1El = qi("num1");

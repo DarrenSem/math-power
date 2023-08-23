@@ -1,4 +1,4 @@
-// calc.js: loaded after defer-loaded "calc.js"
+// calc.ts: loaded after defer-loaded "calc.ts"
 
 declare var define: any;
 (function(root, factory) {
@@ -173,3 +173,4 @@ declare var define: any;
 // const calco = globalThis.calculate || module.exports;
 // (null) = try Node CLI args, if that fails then will attempt querystring
 // console.log( calco(null) );
+

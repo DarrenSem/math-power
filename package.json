@@ -5,13 +5,10 @@
   "main": "index.html",
 
   "scripts": {
-
     "watch": "tsc --watch",
-
     "clean": "echo TODO:clean",
     "build": "npm run clean && tsc",
     "test": "npm run build && node dist/calc.test.js",
-
     "preview": "npm run build && START \"\" ./index.html",
     "ghp": "echo TODO: ghp",
     "publish": "npm run build && npm run ghp"
@@ -35,6 +32,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.5.3",
+    "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   }
 }

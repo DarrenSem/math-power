@@ -1,3 +1,4 @@
+// calc.test.ts
 var calctest = require("./calc.js");
 calctest.href = "https://example.com/testing-api?num1=3.x&num2=4&operator=times";
 console.log(calctest);

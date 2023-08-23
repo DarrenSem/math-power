@@ -1,4 +1,4 @@
-// browser.js: defer-loaded after "calc.js"
+// browser.ts: defer-loaded after "calc.ts"
 
 var calculate;
 
@@ -48,3 +48,4 @@ const main = (window, setTimeout, delay): void => {
 };
 
 main(window, setTimeout, 100);  // ensure time enough that HTML fields are visible
+

@@ -1,3 +1,5 @@
+// types.d.ts
+
 type Fields = {
   num1?: number | string,
   operator?: string,
