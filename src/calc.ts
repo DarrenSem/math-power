@@ -1,5 +1,6 @@
 // calc.js: loaded after defer-loaded "calc.js"
 
+declare var define: any;
 (function(root, factory) {
   typeof define === "function" && define.amd
   ? define([], factory)
@@ -10,9 +11,9 @@
   );
 })(typeof self !== "undefined" ? self : globalThis, function() {
 
-  const calculate = data => {
+  const calculate = (data: CalculateData): number | void => {
 
-    let nodeArgsMock;
+    let nodeArgsMock: CalculateData;
     if(typeof data === "string" || Array.isArray(data) ) {
       nodeArgsMock = data;
       data = null;
@@ -31,14 +32,18 @@
       data = calculate.getFieldsData();
     };
 
-    let {num1, operator, num2} = data;
+    let {
+      num1,
+      operator,
+      num2
+    } = data as Fields;
 
     calculate.setFieldsData(num1, operator, num2);  // for visual consistency if calculate({key:value})
 
-    num1 = parseFloat(num1);
-    num2 = parseFloat(num2);
+    num1 = parseFloat( String(num1) );
+    num2 = parseFloat( String(num2) );
 
-    const operations = {
+    const operations: { [key: string]: MathFunction } = {
       "to the power of": (num1, num2) => Math.pow(num1, num2),
       "plus": (num1, num2) => num1 + num2,
       "minus": (num1, num2) => num1 - num2,
@@ -46,7 +51,7 @@
       "divided by": (num1, num2) => num1 / num2,
     };
 
-    const fn = operations[operator];
+    const fn: MathFunction = operations[operator];
 
     if(!fn) {
       return calculate.warnAfterFocus("Please select an operator");
@@ -59,34 +64,33 @@
     return result;
   };
 
-  var fieldsMock = {};
+  var fieldsMock: Fields = {};
 
-  const getFieldsData = () => {
+  const getFieldsData = (): CalculateData => {
     return fieldsMock;
   };
 
-  const setFieldsData = (num1, operator, num2) => {
+  const setFieldsData = (num1, operator, num2): void => {
     fieldsMock.num1 = num1;
     fieldsMock.operator = operator;
     fieldsMock.num2 = num2;
 
-    fieldsMock.result = "";
     // delete fieldsMock.result;
+    fieldsMock.result = null;
 
     console.warn(fieldsMock);
   };
 
-  const warnAfterFocus = message => {
+  const warnAfterFocus = (message): void => {
       console.error(message);
-      return; // return undefined
   };
 
-  const output = result => {
+  const output = (result): void => {
     fieldsMock.result = result;
     console.log(fieldsMock);
   };
 
-  const getArgsData = (href, nodeArgsMock) => {
+  const getArgsData = (href, nodeArgsMock: CalculateData): null | undefined => {
 
     href = getNodeArgsData(nodeArgsMock) ?? href;
 
@@ -105,7 +109,7 @@
     return;
   };
 
-  const getNodeArgsData = nodeArgsMock => {
+  const getNodeArgsData = (nodeArgsMock: CalculateData): string | null => {
 
     const argv = (
       nodeArgsMock

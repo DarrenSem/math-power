@@ -1,33 +1,34 @@
-// view.js: defer-loaded after "calc.js"
+// browser.js: defer-loaded after "calc.js"
 
-const qi = id => document.getElementById(id);
+var calculate;
 
-const num1El = qi("num1");
-const operatorEl = qi("operator");
-const num2El = qi("num2");
-const resultEl = qi("result");
+const qi = (id): HTMLElement => document.getElementById(id);
+
+const num1El = qi("num1") as HTMLInputElement;
+const operatorEl = qi("operator") as HTMLSelectElement;
+const num2El = qi("num2") as HTMLInputElement;
+const resultEl = qi("result") as HTMLInputElement;
 const calcEl = qi("calc-button");
 
-calculate.getFieldsData = () => {
+calculate.getFieldsData = (): CalculateData => {
   const num1 = num1El.value;
   const operator = operatorEl.value;
   const num2 = num2El.value;
   return { num1, operator,num2 };
 };
 
-calculate.setFieldsData = (num1, operator, num2) => {
+calculate.setFieldsData = (num1, operator, num2): void => {
   num1El.value = num1;
   operatorEl.value = operator;
   num2El.value = num2;
 };
 
-calculate.warnAfterFocus = message => {
+calculate.warnAfterFocus = (message): void => {
   operatorEl.focus();
   alert(message);
-  return; // return undefined
 };
 
-calculate.output = result => {
+calculate.output = (result): void => {
   resultEl.value = result;
   resultEl.focus();
   resultEl.select();
@@ -35,7 +36,7 @@ calculate.output = result => {
 
 calculate.href = location.href.replace(location.hash, "");
 
-const main = (window, setTimeout, delay) => {
+const main = (window, setTimeout, delay): void => {
 
   calcEl.onclick = () => calculate();
 
