@@ -5,13 +5,18 @@
   "main": "index.html",
 
   "scripts": {
-    "watch": "tsc --watch",
-    "clean": "echo TODO:clean",
+    "preview": "START \"\" ./index.html",
+
+    "clean": "node clean.js",
+    "watch": "npm run clean && tsc --watch",
     "build": "npm run clean && tsc",
-    "test": "npm run build && node dist/calc.test.js",
-    "preview": "npm run build && START \"\" ./index.html",
     "gh": " START \"\" /b \"C:\\data\\apps\\git\\gh-pages merge from master.bat\" ",
-    "publish": "npm run build && npm run gh ."
+
+    "start": "npm run build && npm run preview",
+    "test": "npm run build && node ./dist/calc.test.js",
+
+    "_publish_git_commands_": "git checkout gh-pages && git merge master && git push origin gh-pages && git checkout -",
+    "publish": "npm run build && npm run gh . && git checkout -"
   },
 
   "keywords": [
