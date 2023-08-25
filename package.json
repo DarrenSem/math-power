@@ -6,21 +6,21 @@
 	"scripts": {
 		"watch": "tsc --build --watch",
 
-    "copy-css": " copy /y \".\\src\\*.css\" \".\\dist\" > NUL || cp \"./src/\"*.css \"./dist\" ",
-		"compile-css": " npm run copy-css && cleancss --source-map --source-map-inline-sources --output ./dist/bundle.css -- ./dist/calc.css ",
-    "compile-js": " tsc && uglifyjs --compress --mangle --source-map \"includeSources,url='./bundle.js.map',content=inline\" --output ./dist/bundle.js -- ./dist/calc.js ./dist/browser.js ",
+		"copy-css": " copy /y \".\\src\\*.css\" \".\\dist\" > NUL || cp \"./src/\"*.css \"./dist\" ",
+		"compile-css": "npm run copy-css",
+		"compile-js": "tsc",
 
-    "test": "ECHO.Testing latest build... && node ./dist/calc.test.js",
+		"test": "ECHO.Testing latest build... && node ./dist/calc.test.js",
 
-    "min-css": " cleancss --source-map --source-map-inline-sources --output ./dist/bundle.css -- ./dist/calc.css ",
-    "min-js": " uglifyjs --compress --mangle --source-map \"includeSources,url='./bundle.js.map',content=inline\" --output ./dist/bundle.js -- ./dist/calc.js ./dist/browser.js ",
+		"min-css": "cleancss --source-map --source-map-inline-sources --output ./dist/bundle.css -- ./dist/calc.css",
+		"min-js": "uglifyjs --compress --mangle --source-map \"includeSources,url='./bundle.js.map',content=inline\" --output ./dist/bundle.js -- ./dist/calc.js ./dist/browser.js",
 
 		"build": "ECHO.Starting new build... && node clean.js && npm run compile-css && npm run compile-js && npm test && ECHO.Build compiled and passed tests. && npm run min-css && npm run min-js && ECHO.Build minified -- ready to deploy.",
 
-    "preview": "START \"\" ./index.html",
+		"preview": "START \"\" ./index.html",
 		"start": "ECHO.Starting browser with latest build... && npm run preview",
 
-    "gh": " START \"\" /b \"C:\\data\\apps\\git\\gh-pages merge from master.bat\" ",
+		"gh": " START \"\" /b \"C:\\data\\apps\\git\\gh-pages merge from master.bat\" ",
 		"_publish_git_commands_": "git checkout gh-pages && git merge master && git push origin gh-pages && git checkout -",
 		"publish": "ECHO.Publishing latest build... && npm test && npm run gh . && git checkout - && ECHO.DONE."
 	},
@@ -41,11 +41,11 @@
 		"url": "https://github.com/DarrenSem/math-power"
 	},
 	"devDependencies": {
-		"@types/node": "^20.5.3",
-		"ts-node": "^10.9.1",
 		"typescript": "^5.1.6",
-		"uglify-js": "^3.17.4",
-    "clean-css": "^5.3.2",
-    "clean-css-cli": "^5.6.2"
+		"ts-node": "^10.9.1",
+		"@types/node": "^20.5.3",
+		"clean-css": "^5.3.2",
+		"clean-css-cli": "^5.6.2",
+		"uglify-js": "^3.17.4"
 	}
 }
