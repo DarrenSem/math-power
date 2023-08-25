@@ -9,11 +9,12 @@
 		"watch": "npm run clean && tsc --watch",
 		"copycss": " copy /y \".\\src\\*.css\" \".\\dist\" > NUL || cp \"./src/\"*.css \"./dist\" ",
 		"build": "npm run clean && tsc && npm run copycss",
-		"gh": " START \"\" /b \"C:\\data\\apps\\git\\gh-pages merge from master.bat\" ",
 		"start": "npm run build && npm run preview",
 		"test": "npm run build && node ./dist/calc.test.js",
+    "gh": " START \"\" /b \"C:\\data\\apps\\git\\gh-pages merge from master.bat\" ",
 		"_publish_git_commands_": "git checkout gh-pages && git merge master && git push origin gh-pages && git checkout -",
-		"publish": "npm run build && npm run gh . && git checkout -"
+    "_publish_maybe_override_is_not_necessary_": "npm run build && npm run gh . && git checkout -",
+    "publish": "npm run gh . && git checkout -"
 	},
 	"keywords": [
 		"AWS",
