@@ -1,43 +1,39 @@
 {
-  "name": "math-power",
-  "version": "1.4.1",
-  "description": "Web app for AWS experimenting via simple math operations",
-  "main": "index.html",
-
-  "scripts": {
-    "preview": "START \"\" ./index.html",
-
-    "clean": "node clean.js",
-    "watch": "npm run clean && tsc --watch",
-    "build": "npm run clean && tsc",
-    "gh": " START \"\" /b \"C:\\data\\apps\\git\\gh-pages merge from master.bat\" ",
-
-    "start": "npm run build && npm run preview",
-    "test": "npm run build && node ./dist/calc.test.js",
-
-    "_publish_git_commands_": "git checkout gh-pages && git merge master && git push origin gh-pages && git checkout -",
-    "publish": "npm run build && npm run gh . && git checkout -"
-  },
-
-  "keywords": [
-    "AWS",
-    "Amazon",
-    "Web",
-    "Services",
-    "experimenting",
-    "math",
-    "operations",
-    "maths"
-  ],
-  "author": "Darren Semotiuk",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/DarrenSem/math-power"
-  },
-  "devDependencies": {
-    "@types/node": "^20.5.3",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
-  }
+	"name": "math-power",
+	"version": "1.5.0",
+	"description": "Web app for AWS experimenting via simple math operations",
+	"main": "index.html",
+	"scripts": {
+		"preview": "START \"\" ./index.html",
+		"clean": "node clean.js",
+		"watch": "npm run clean && tsc --watch",
+		"copycss": " copy /y \".\\src\\*.css\" \".\\dist\" > NUL || cp \"./src/\"*.css \"./dist\" ",
+		"build": "npm run clean && tsc && npm run copycss",
+		"gh": " START \"\" /b \"C:\\data\\apps\\git\\gh-pages merge from master.bat\" ",
+		"start": "npm run build && npm run preview",
+		"test": "npm run build && node ./dist/calc.test.js",
+		"_publish_git_commands_": "git checkout gh-pages && git merge master && git push origin gh-pages && git checkout -",
+		"publish": "npm run build && npm run gh . && git checkout -"
+	},
+	"keywords": [
+		"AWS",
+		"Amazon",
+		"Web",
+		"Services",
+		"experimenting",
+		"math",
+		"operations",
+		"maths"
+	],
+	"author": "Darren Semotiuk",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/DarrenSem/math-power"
+	},
+	"devDependencies": {
+		"@types/node": "^20.5.3",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.1.6"
+	}
 }
