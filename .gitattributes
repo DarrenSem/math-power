@@ -1,5 +1,7 @@
 # git CLI
 **/*.js.map -diff
+**/*.css.map -diff
 
 # GitHub
 **/*.js.map linguist-generated=true
+**/*.css.map linguist-generated=true
