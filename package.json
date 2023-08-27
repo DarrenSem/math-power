@@ -1,6 +1,6 @@
 {
 	"name": "math-power",
-	"version": "1.5.1",
+	"version": "1.6.0",
 	"description": "Web app for AWS experimenting via simple math operations",
 	"main": "index.html",
 	"scripts": {
@@ -10,7 +10,7 @@
 		"compile-css": "npm run copy-css",
 		"compile-js": "tsc",
 
-		"test": "ECHO.Testing latest build... && node ./dist/calc.test.js",
+		"test": "ECHO.Testing latest build... && node ./src/tests.js",
 
 		"min-css": "cleancss --source-map --source-map-inline-sources --output ./dist/bundle.css -- ./dist/calc.css",
 		"min-js": "uglifyjs --compress --mangle --source-map \"includeSources,url='./bundle.js.map',content=inline\" --output ./dist/bundle.js -- ./dist/calc.js ./dist/browser.js",
