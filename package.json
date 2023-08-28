@@ -11,6 +11,7 @@
 		"compile-js": "tsc",
 
 		"test": "ECHO.Testing latest build... && node ./src/tests.js",
+		"debug": "ECHO.Debugging tests... && node --inspect ./src/tests.js",
 
 		"min-css": "cleancss --source-map --source-map-inline-sources --output ./dist/bundle.css -- ./dist/calc.css",
 		"min-js": "uglifyjs --compress --mangle --source-map \"includeSources,url='./bundle.js.map',content=inline\" --output ./dist/bundle.js -- ./dist/calc.js ./dist/browser.js",
