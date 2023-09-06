@@ -1,6 +1,6 @@
 {
 	"name": "math-power",
-	"version": "1.6.0",
+	"version": "1.7.0",
 	"description": "Web app for AWS experimenting via simple math operations",
 	"main": "index.html",
 	"scripts": {

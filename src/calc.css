@@ -5,7 +5,7 @@
 /* TODO: try using PostCSS or similar to build some part of it dynamically */
 
 body {
-  background-color: hsl(0, 0%, 80%);
+  background-color: #777;
   color: hsl(120, 50%, 20%);
   font-family: Arial, sans-serif;
   /* line-height: 1rem; */
@@ -64,7 +64,7 @@ button:hover {
 
 #result {
   background-color: hsl(0, 10%, 20%);
-  color:hsl(120, 80%, 50%);
+  color: rgb(48 232 48);
   /* font-size: 1.2em; */
   margin-left: 10px;
   padding: 0.25rem 0.5rem;
