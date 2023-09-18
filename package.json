@@ -5,22 +5,22 @@
 	"main": "index.html",
 	"scripts": {
 		"watch": "tsc --build --watch",
-
+    "\n\b\b-------": "",
 		"copy-css": " copy /y \".\\src\\*.css\" \".\\dist\" > NUL || cp \"./src/\"*.css \"./dist\" ",
 		"compile-css": "npm run copy-css",
 		"compile-js": "tsc",
-
+    "\n\b\b------- ": "",
 		"test": "ECHO.Testing latest build... && node ./src/tests.js",
 		"debug": "ECHO.Debugging tests... && node --inspect ./src/tests.js",
-
+    "\n\b\b-------  ": "",
 		"min-css": "cleancss --source-map --source-map-inline-sources --output ./dist/bundle.css -- ./dist/calc.css",
 		"min-js": "uglifyjs --compress --mangle --source-map \"includeSources,url='./bundle.js.map',content=inline\" --output ./dist/bundle.js -- ./dist/calc.js ./dist/browser.js",
-
+    "\n\b\b-------   ": "",
 		"build": "ECHO.Starting new build... && node clean.js && npm run compile-css && npm run compile-js && npm test && ECHO.Build compiled and passed tests. && npm run min-css && npm run min-js && ECHO.Build minified -- ready to deploy.",
-
+    "\n\b\b-------    ": "",
 		"preview": "START \"\" ./index.html",
 		"start": "ECHO.Starting browser with latest build... && npm run preview",
-
+    "\n\b\b-------     ": "",
 		"gh": " START \"\" /b \"C:\\data\\apps\\git\\gh-pages merge from master.bat\" ",
 		"_publish_git_commands_": "git checkout gh-pages && git merge master && git push origin gh-pages && git checkout -",
 		"publish": "ECHO.Publishing latest build... && npm test && npm run gh . && git checkout - && ECHO.DONE."
@@ -42,11 +42,13 @@
 		"url": "https://github.com/DarrenSem/math-power"
 	},
 	"devDependencies": {
-		"typescript": "^5.1.6",
-		"ts-node": "^10.9.1",
+		"@aws-sdk/client-dynamodb": "^3.415.0",
 		"@types/node": "^20.5.3",
+		"aws-sdk": "^2.1459.0",
 		"clean-css": "^5.3.2",
 		"clean-css-cli": "^5.6.2",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.1.6",
 		"uglify-js": "^3.17.4"
 	}
 }
